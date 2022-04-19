@@ -60,7 +60,7 @@
                                     text
                                 
                                     style="background:#207189; margin-left:5px; margin-bottom:10px"
-                                    @click="reserve"
+                                    @click="reservar(esto)"
                                 >
                                     Añadir
                                 </v-btn>
@@ -71,6 +71,8 @@
                     </div> 
                 </div>   
             </div>
+
+            {{ arrayCarrito }}
             <div style="display:flex">
                 <div  v-for="(esto, index) in datosgeneral" :key="esto">
                     <div v-if="existe(index)" >
@@ -211,6 +213,7 @@
             </div>
             
         </div>
+       
         <!-- <div v-if="estadoBtnVerMas()">
             <center>
                 <v-btn
@@ -222,25 +225,40 @@
                 </v-btn>
             </center>       
         </div> -->
+
+
     </div>
-  
+    
 </template>
 <script>
 import headers from '@/components/headers'
 import usuario from '@/components/usuario'
 import { Auth } from 'aws-amplify'
+// import { req } from 'aws-amplify'
 import { mapGetters } from "vuex";
 export default {
     components:{
         headers,
-        usuario
+        usuario,
+        
     },
-    data: () => ({
-      loading: false,
-      selection: 1,
-      estadoVermas: false,
-      usuario: null
-    }),
+
+    setup(){
+
+    },
+
+    data() {
+
+       return {
+        loading: false,
+        selection: 1,
+        estadoVermas: false,
+        modalEstado:true,
+        usuario: null,
+        isnull:null,
+        isopenCronograma: false
+        }
+    },
      methods: {
     async sedaclick(key){
         const user = await Auth.currentAuthenticatedUser();
@@ -256,7 +274,26 @@ export default {
         return false
     },
     comprar(){
-        console.log("se dio click en el boton comprar");
+        this.isnull = null
+        this.isopenCronograma = true
+        console.log("estado del cronograma", this.isopenCronograma);
+        console.log("ruteando");
+
+        // console.log("este es el getsub", req);
+    },
+    closeModalCronograma() {
+      this.isopenCronograma = false
+    },
+    reservar(esto){
+        console.log("se dio en añadir", esto);
+        const payload ={
+            "id": esto.id,
+            "nombre": esto.nombre,
+            "precio": esto.precio
+        }
+        this.$store.dispatch('carrito/adicion', payload)
+        
+        
     },
     btnvermas(){
         this.estadoVermas = true
@@ -292,7 +329,8 @@ export default {
       },
     },
     computed: {
-         ...mapGetters("nuevos", ["datosgeneral"])
+         ...mapGetters("nuevos", ["datosgeneral"]),
+         ...mapGetters("carrito", ["arrayCarrito"])
 
     },
     mounted () {
@@ -311,6 +349,8 @@ export default {
     background: rgb(241, 241, 241);
     margin-left: 100px;
     padding-left: 10px;
+
 }
+
 
 </style>

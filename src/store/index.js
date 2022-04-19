@@ -4,6 +4,7 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 import nuevos from './nuevos'
 import users from './users'
+import carrito from './carrito'
 
 
 export default new Vuex.Store({
@@ -16,6 +17,7 @@ export default new Vuex.Store({
   },
   modules: {
     nuevos,
-    users
+    users,
+    carrito
   }
 })

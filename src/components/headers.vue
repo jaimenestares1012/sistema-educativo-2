@@ -28,15 +28,59 @@
                 color="#ddeaee"
                 dark
                 style="margin-left:5px ; margin-top: 20px"
+                @click="modalCarro()"
                 ><center>
-                    <v-icon
-                    dark
-                    color="#050505"
-                    >
-                    mdi-shopping
-                    </v-icon>
+                    <img src="https://acceso.com.pe/wp-content/uploads/2022/04/carrito.png" class="imagen-carro" alt="">
                 </center>
             </v-btn>   
     </div>
+    <div class="modalCarroStylo" v-if="modalEstado">
+        <iframe src="" frameborder="0">
+            <h1>sssssssssssss</h1>
+        </iframe>
+    </div>
 </div>
 </template>
+<script>
+export default {
+  components: {
+  },
+  data() {
+    return {
+      login: '',
+      password: '',
+      modalEstado: false,
+    }
+  },
+  computed: {
+    // signedIn(){
+    //   console.log(this.$store.state.signedIn);
+    //   return this.$store.state.signedIn;
+    // }
+  },
+  created(){
+    
+  },
+  methods:{
+
+      modalCarro(){
+          this.modalEstado=true
+      }
+    
+  }
+}
+</script>
+
+
+<style >
+.imagen-carro{
+    width: 40px;
+}
+.modalCarroStylo{
+    width: 400px;
+    height: 100px;
+    position: fixed;
+    background: rgb(228, 220, 220);
+    margin-left: 900px ;
+}
+</style>
