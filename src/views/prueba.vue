@@ -51,7 +51,7 @@
                                     color="#ffffff"
                                     text
                                     style="background:#207189; margin-left:5px; margin-bottom:10px"
-                                    @click="comprar()"
+                                    @click="comprar(esto.id)"
                                 >
                                     Comprar
                                 </v-btn>
@@ -72,7 +72,7 @@
                 </div>   
             </div>
 
-            {{ arrayCarrito }}
+            
             <div style="display:flex">
                 <div  v-for="(esto, index) in datosgeneral" :key="esto">
                     <div v-if="existe(index)" >
@@ -121,7 +121,7 @@
                                     color="#ffffff"
                                     text
                                     style="background:#207189; margin-left:5px; margin-bottom:10px"
-                                    @click="reserve"
+                                    @click="comprar()"
                                 >
                                     Comprar
                                 </v-btn>
@@ -130,7 +130,7 @@
                                     text
                                 
                                     style="background:#207189; margin-left:5px; margin-bottom:10px"
-                                    @click="reserve"
+                                    @click="reservar(esto)"
                                 >
                                     Añadir
                                 </v-btn>
@@ -273,9 +273,10 @@ export default {
         }
         return false
     },
-    comprar(){
+    comprar(key){
         this.isnull = null
         this.isopenCronograma = true
+        window.location.href = `/compra/?key=${key}`;
         console.log("estado del cronograma", this.isopenCronograma);
         console.log("ruteando");
 

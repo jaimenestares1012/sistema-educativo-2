@@ -7,24 +7,33 @@ export default {
       //   console.log("-",  state.arrayProductos[i].id);
       //   
       // }
+
       if (state.arrayProductos.length==0) {
-          state.arrayProductos.push(payload)  
+          state.arrayProductos.push(payload) 
+          state.total= payload.precio
       }
 
-      const found = state.arrayProductos.find(element => element = 10);
-      // for (let i = 0; i < state.arrayProductos.length; i++) {
-      //       if ( state.arrayProductos[i].id==payload.id) {
-      //           console.log("son productos iguales");
-      //       }else{
-      //           console.log("son distintos", payload);
-      //           state.arrayProductos.push(payload)  
-
-      //       }
-        
-      // }
+      const resultado = state.arrayProductos.find( algo => algo.id == payload.id );
+      if (resultado) {
+        console.log("repeticua", );
+      }else{
+        state.arrayProductos.push(payload)
+        state.total=state.total + payload.precio
+      }
       state.tamano= state.arrayProductos.length
+      console.log("este es el tamañp", state.tamano);
     },
-    
+    ELIMINAR(state, payload){
+      // const resul = state.arrayProductos.find( algo => algo.id == payload )
+      var newArray = state.arrayProductos.filter((item) => item.id !== payload);
+      state.arrayProductos = newArray
+      let sumita = 0
+      for (let i = 0; i < state.arrayProductos.length; i++) {
+        sumita=sumita+ state.arrayProductos[i].precio
+      }
+      state.total=sumita
+      console.log("esta es la sumita", sumita);
+    },
     
     
     

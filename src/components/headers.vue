@@ -31,18 +31,28 @@
                 @click="modalCarro()"
                 ><center style="display:flex">
                     <img src="https://acceso.com.pe/wp-content/uploads/2022/04/carrito.png" class="imagen-carro" alt="">
-                    <h2 style="margin-top:8px; color: red">{{ tamano }}</h2>
+                    <h1 style="margin-top:8px; color: red">{{ tamano }}</h1>
                 </center>
+                
             </v-btn>
+
             <div class="modalCarrito" v-if="modalEstado">
-                <productos></productos>
-                <span>Total: 125</span>
-                <v-btn class="bton-carr" color="primary" @click="cerrarModal()">
+                 <div class="container-button">
+                    <v-btn class="bton-carr" color="primary" @click="cerrarModal()">
                     Cerrar
-                </v-btn>
-                <v-btn class="bton-carr2" color="primary" @click="comprar()">
-                    Comprar
-                </v-btn>
+                    </v-btn>
+                    <v-btn class="bton-carr2" color="primary" @click="comprar()">
+                        Comprar
+                    </v-btn>
+
+                </div>
+                <productos style="margin-top:20px"></productos>
+                <div style="margin-top:30px">
+                     <span> <b>Total: {{suma}}</b> </span>
+                </div>
+                
+               
+                
             </div>   
     </div>
    
@@ -63,8 +73,10 @@ export default {
     }
   },
   computed: {
-    ...mapGetters("carrito", ["tamano"])
-
+    ...mapGetters("carrito", ["tamano", "arrayCarrito", "total"]),
+    suma(){
+        return this.total
+    }
     // signedIn(){
     //   console.log(this.$store.state.signedIn);
     //   return this.$store.state.signedIn;
@@ -99,20 +111,21 @@ export default {
     background: rgb(244, 221, 221);
     width: 280px;
     margin-top: 70px ;
-    height: 500px;
+    height: 350px;
     margin-left: 1270px;
 }
 .bton-carr{
-    margin-top: 450px;
-    position: absolute;
     color: black !important;
     /* background: rgb(177, 122, 232); */
 }
 .bton-carr2{
-    margin-top: 450px;
-    position: absolute;
     color: black !important;
     margin-left: 6px;
     /* background: rgb(177, 122, 232); */
+}
+.container-button{
+    position: absolute;
+    margin-top: 300px ;
+    margin-left: 40px ;
 }
 </style>
