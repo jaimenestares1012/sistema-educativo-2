@@ -3,9 +3,9 @@
         <headers></headers>
         <usuario></usuario>
         <div class="container-card">
-            <div style="display:flex">
+            <div style="display:flex; ">
                 <div style="margin:30px 5px; " v-for="(esto, index) in datosgeneral" :key="esto">
-                    <div v-if="index<5" >
+                    <div v-if="index<5"  style="">
                         <v-card
                            
                             v-if="esto.id"
@@ -300,7 +300,6 @@ export default {
     },
     existe(index){
         if (5<=index && index<=9) {
-            console.log(index);
             return true
         }
         else{
@@ -345,10 +344,11 @@ export default {
 
 <style >
 .container-card{
-    max-width: 1200px;
+    max-width: 1180px;
     background: rgb(241, 241, 241);
     margin-left: 100px;
     padding-left: 10px;
+    position: relative;
 
 }
 

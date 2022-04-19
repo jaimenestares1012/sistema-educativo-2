@@ -29,21 +29,31 @@
                 dark
                 style="margin-left:5px ; margin-top: 20px"
                 @click="modalCarro()"
-                ><center>
+                ><center style="display:flex">
                     <img src="https://acceso.com.pe/wp-content/uploads/2022/04/carrito.png" class="imagen-carro" alt="">
+                    <h2 style="margin-top:8px; color: red">{{ tamano }}</h2>
                 </center>
-            </v-btn>   
+            </v-btn>
+            <div class="modalCarrito" v-if="modalEstado">
+                <productos></productos>
+                <span>Total: 125</span>
+                <v-btn class="bton-carr" color="primary" @click="cerrarModal()">
+                    Cerrar
+                </v-btn>
+                <v-btn class="bton-carr2" color="primary" @click="comprar()">
+                    Comprar
+                </v-btn>
+            </div>   
     </div>
-    <div class="modalCarroStylo" v-if="modalEstado">
-        <iframe src="" frameborder="0">
-            <h1>sssssssssssss</h1>
-        </iframe>
-    </div>
+   
 </div>
 </template>
 <script>
+import { mapGetters } from "vuex";
+import productos from '@/components/productos'
 export default {
   components: {
+      productos
   },
   data() {
     return {
@@ -53,6 +63,8 @@ export default {
     }
   },
   computed: {
+    ...mapGetters("carrito", ["tamano"])
+
     // signedIn(){
     //   console.log(this.$store.state.signedIn);
     //   return this.$store.state.signedIn;
@@ -65,6 +77,12 @@ export default {
 
       modalCarro(){
           this.modalEstado=true
+      },
+      cerrarModal(){
+            this.modalEstado=false
+      },
+      comprar(){
+          
       }
     
   }
@@ -76,11 +94,25 @@ export default {
 .imagen-carro{
     width: 40px;
 }
-.modalCarroStylo{
-    width: 400px;
-    height: 100px;
-    position: fixed;
-    background: rgb(228, 220, 220);
-    margin-left: 900px ;
+.modalCarrito{
+    position: absolute;
+    background: rgb(244, 221, 221);
+    width: 280px;
+    margin-top: 70px ;
+    height: 500px;
+    margin-left: 1270px;
+}
+.bton-carr{
+    margin-top: 450px;
+    position: absolute;
+    color: black !important;
+    /* background: rgb(177, 122, 232); */
+}
+.bton-carr2{
+    margin-top: 450px;
+    position: absolute;
+    color: black !important;
+    margin-left: 6px;
+    /* background: rgb(177, 122, 232); */
 }
 </style>

@@ -1,0 +1,10 @@
+[
+  {
+    "groupName": "pruebapool",
+    "precedence": 1
+  },
+  {
+    "groupName": "CURSOSDESAPOOL2",
+    "precedence": 2
+  }
+]

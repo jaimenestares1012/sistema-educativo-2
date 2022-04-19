@@ -2,14 +2,29 @@ export default {
     
 
   ADD(state, payload){
-    console.log("em las mutations", payload);
       // state.arrayProductos=payload
-      for (let i = 0; i < state.arrayProductos.length; i++) {
-        console.log("este es el i", state.arrayProductos);
+      // for (let i = 0; i <= state.arrayProductos.length; i++) {
+      //   console.log("-",  state.arrayProductos[i].id);
+      //   
+      // }
+      if (state.arrayProductos.length==0) {
+          state.arrayProductos.push(payload)  
       }
-      state.arrayProductos.push(payload)    
-      console.log("cod res desde las mutaciones", state.arrayProductos );
+
+      const found = state.arrayProductos.find(element => element = 10);
+      // for (let i = 0; i < state.arrayProductos.length; i++) {
+      //       if ( state.arrayProductos[i].id==payload.id) {
+      //           console.log("son productos iguales");
+      //       }else{
+      //           console.log("son distintos", payload);
+      //           state.arrayProductos.push(payload)  
+
+      //       }
+        
+      // }
+      state.tamano= state.arrayProductos.length
     },
+    
     
     
     
