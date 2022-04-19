@@ -10,6 +10,11 @@ export default {
       state.detalles=payload.payload
       console.log("cod res desde las mutaciones", state.detalles );
     },
+    RESPUESTAGET(state, payload){
+      console.log("em las mutations");
+        state.arraymios=payload.payload
+        console.log("cod res desde las mutaciones", state.arraymios );
+      },
   
     
     

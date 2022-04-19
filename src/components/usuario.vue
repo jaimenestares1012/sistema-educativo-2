@@ -32,7 +32,7 @@ export default {
       },
       async conidcionProfe(){
         const user = await Auth.currentAuthenticatedUser();
-        if ( user.username=="jaimenestares1013") {
+        if ( user.username=="jaimenestares1012") {
            return true
 
         }

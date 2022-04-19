@@ -93,4 +93,56 @@ async function actualizarform(payload) {
 
 
 
-export {conversor, sube ,details, actualizarform};
+async function apigetconsulta(payload) {
+  console.log("api get consultas mios",payload);
+try {
+  
+  const { data } = await axios({
+   
+    url: `https://jbqqewuoof.execute-api.us-east-2.amazonaws.com/DESA/inscripcion`,
+    method: "GET",
+    headers: headers,
+    data: payload,
+  });
+  return data
+  
+  // `````
+} catch (error) {
+  return {
+    codRes: "99",
+    message: "Error",
+  };
+}
+}
+
+
+async function apiGetCompra(payload) {
+  console.log("en la api  a punto de dar el golpe" , payload);
+try {
+  const id=payload.id
+  const precio=payload.precio
+  const dataenviar={
+    "monto":precio
+  }
+  console.log("estamos?");
+  const { data } = await axios({
+    url: `https://jbqqewuoof.execute-api.us-east-2.amazonaws.com/DESA/inscripcion/${id}`,
+    method: "POST",
+    headers: headers,
+    data: dataenviar,
+  });
+  return data
+  
+  // `````
+} catch (error) {
+  console.log("hubo un error");
+  return {
+    codRes: "99",
+    message: "Error",
+  };
+}
+}
+
+
+
+export {conversor, sube ,details, actualizarform, apigetconsulta, apiGetCompra};

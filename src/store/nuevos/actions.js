@@ -1,10 +1,21 @@
 
-import {  conversor, details, sube, actualizarform } from "@/api";
+import {  conversor, details, sube, actualizarform,apigetconsulta  } from "@/api";
 export async function consulta ({ commit}, payload) {
   console.log(payload);
   try {
     const response = await conversor(payload);
     commit('RESPUESTA',response )  
+  } catch (e) {
+    console.log(e)
+    return false
+  }
+}
+
+export async function consultamios ({ commit}, payload) {
+  console.log(payload);
+  try {
+    const response = await apigetconsulta(payload);
+    commit('RESPUESTAGET',response )  
   } catch (e) {
     console.log(e)
     return false

@@ -7,7 +7,7 @@
             <div style="width:68%" class="ordennombre">
                 <span > {{index+1}}.- {{esto.nombre}}</span>
             </div> 
-            <div  style="width:25%">
+            <div  style="width:25%; margin-top:8px">
                 <span>{{esto.precio}}</span>
             </div>
             <div style="width: 10%">

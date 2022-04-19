@@ -274,11 +274,7 @@ export default {
         return false
     },
     comprar(key){
-        this.isnull = null
-        this.isopenCronograma = true
         window.location.href = `/compra/?key=${key}`;
-        console.log("estado del cronograma", this.isopenCronograma);
-        console.log("ruteando");
 
         // console.log("este es el getsub", req);
     },
@@ -336,6 +332,7 @@ export default {
     mounted () {
         const estado="a"
         this.$store.dispatch('nuevos/consulta', estado)
+        this.$store.dispatch('carrito/consultamios', estado)
         this.categorias()
         
         

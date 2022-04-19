@@ -20,9 +20,24 @@
             <v-btn @click="categorias()" color="#ddeaee" style="margin-left:30px ; margin-top: 20px">
                 Mi progreso
             </v-btn>
-             <v-btn @click="categorias()" color="#ddeaee" style="margin-left:5px ; margin-top: 20px">
-                Perfil
+             <v-btn @click="Mios()" color="#ddeaee" style="margin-left:5px ; margin-top: 20px">
+                Mis Cursos <h1 style="margin-top:8px; color: red"></h1>  
             </v-btn>
+             <div class="modalCarrito" v-if="modalestadoMios">
+                 <div class="container-button2">
+                    <v-btn class="bton-carr" color="primary" @click="cerrarModal2()">
+                    Cerrar
+                    </v-btn>
+
+                </div>
+                <productosMios style="margin-top:20px"></productosMios>
+                <div style="margin-top:30px">
+                     <span> <b>Total: {{suma}}</b> </span>
+                </div>
+             
+               
+                
+            </div>   
             <v-btn
                 class="ma-2"
                 color="#ddeaee"
@@ -35,7 +50,7 @@
                 </center>
                 
             </v-btn>
-
+            
             <div class="modalCarrito" v-if="modalEstado">
                  <div class="container-button">
                     <v-btn class="bton-carr" color="primary" @click="cerrarModal()">
@@ -50,7 +65,7 @@
                 <div style="margin-top:30px">
                      <span> <b>Total: {{suma}}</b> </span>
                 </div>
-                
+             
                
                 
             </div>   
@@ -61,19 +76,23 @@
 <script>
 import { mapGetters } from "vuex";
 import productos from '@/components/productos'
+import productosMios from '@/components/productosMios'
 export default {
   components: {
-      productos
+      productos,
+      productosMios
   },
   data() {
     return {
       login: '',
       password: '',
       modalEstado: false,
+      modalestadoMios: false
     }
   },
   computed: {
     ...mapGetters("carrito", ["tamano", "arrayCarrito", "total"]),
+    ...mapGetters("nuevos", ["arraymios"]),
     suma(){
         return this.total
     }
@@ -93,11 +112,27 @@ export default {
       cerrarModal(){
             this.modalEstado=false
       },
+      cerrarModal2(){
+            this.modalestadoMios=false
+      },
       comprar(){
           
-      }
+      },
+      Mios(){
+          console.log("este es el arreglo de mios", this.arraymios);
+          this.modalestadoMios=true
+      },
     
-  }
+  },
+   mounted () {
+        const estado="a"
+        this.$store.dispatch('nuevos/consulta', estado)
+        this.$store.dispatch('nuevos/consultamios', estado)
+        this.categorias()
+        
+        
+    },
+  
 }
 </script>
 
@@ -127,5 +162,10 @@ export default {
     position: absolute;
     margin-top: 300px ;
     margin-left: 40px ;
+}
+.container-button2{
+    position: absolute;
+    margin-top: 300px ;
+    margin-left: 88px ;
 }
 </style>
