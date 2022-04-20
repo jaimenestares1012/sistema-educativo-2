@@ -34,7 +34,16 @@ export default {
       state.total=sumita
       console.log("esta es la sumita", sumita);
     },
-    
+    MODAL(state, payload){
+      state.estadoModal=false
+      state.codRes=true
+    },
+    ESTADOON(state, payload){
+      state.estadoModal=true
+    },
+    ERROR(state, payload){
+      state.codError=true
+    }
     
     
     

@@ -3,7 +3,7 @@
              <h4  color="#ddeaee" style="margin-left:5px ; margin-top: 20px">
                 Hola: <span class="nombre-usuario">{{ usuario }}</span> 
             </h4>
-           
+            
             <v-btn
                 class="ma-2"
                 color="#ddeaee"

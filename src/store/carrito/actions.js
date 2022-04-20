@@ -28,7 +28,7 @@ export async function adicion ({ commit, state}, payload) {
       return false
     }
   }
-  
+
   export async function eliminar ({ commit, state}, payload) {
 
     try {
@@ -40,6 +40,18 @@ export async function adicion ({ commit, state}, payload) {
     }
   }
 
+
+
+  export async function estadoModal ({ commit, state}, payload) {
+
+    try {
+   
+    commit('ESTADOON',payload )  
+    } catch (e) {
+      console.log(e)
+      return false
+    }
+  }
   export async function compra ({ commit, state}, payload) {
     console.log("estamos en la compra", payload);
 
@@ -49,6 +61,14 @@ export async function adicion ({ commit, state}, payload) {
     try {
       const response = await apiGetCompra(payload);
       console.log("esta es la respuesta de la compra", response);
+      if (response.codRes=="99") {
+        console.log("en la respuesta de 99");
+        commit('ERROR',payload ) 
+      }
+      else{
+        commit('MODAL',payload )  
+      }
+     
     } catch (e) {
       console.log(e)
       return false

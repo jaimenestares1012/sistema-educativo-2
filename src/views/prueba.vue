@@ -16,7 +16,7 @@
                             <v-img
                             @click="sedaclick(esto.id)"
                             height="150"
-                            src="https://acceso.com.pe/wp-content/uploads/2022/03/logo.png"
+                            src="https://acceso.com.pe/wp-content/uploads/2022/04/WhatsApp-Image-2022-04-19-at-6.39.41-PM-1.jpeg"
                             ></v-img>
 
                             <v-card-title> {{ esto.nombre }} </v-card-title>
@@ -86,7 +86,7 @@
                         >
                             <v-img
                             height="150"
-                            src="https://acceso.com.pe/wp-content/uploads/2022/03/logo.png"
+                            src="https://acceso.com.pe/wp-content/uploads/2022/04/WhatsApp-Image-2022-04-19-at-6.39.41-PM-1.jpeg"
                             ></v-img>
 
                             <v-card-title> {{ esto.nombre }} </v-card-title>
@@ -111,7 +111,7 @@
                             </v-row>
                             <br>
                             <div class="my-4 text-subtitle-1">
-                                 {{esto.precio}}
+                                S/. {{esto.precio}}
                             </div>
 
                             
@@ -121,7 +121,7 @@
                                     color="#ffffff"
                                     text
                                     style="background:#207189; margin-left:5px; margin-bottom:10px"
-                                    @click="comprar()"
+                                    @click="comprar(esto.id)"
                                 >
                                     Comprar
                                 </v-btn>

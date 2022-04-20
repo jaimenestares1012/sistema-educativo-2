@@ -1,11 +1,36 @@
 <template>
     <div>
-        <headers></headers>       
+        <headers></headers>  
+        <div v-if="estadoModalGrande" class="modalespera">
+            <div v-if="estadoModal"> 
+                  <h1>Espera, su compra se está procesando!</h1>
+                <img src="https://acceso.com.pe/wp-content/uploads/2022/04/reloj.png" class="image-espera" alt="">
+            </div>
+            <div v-if="!estadoModal" > 
+                 <h1 style="font-size:50px"> Felicidades su compra fue hecha con éxito </h1> 
+                 <v-btn @click="redirect()">
+                      Ir al principal
+                 </v-btn>
+            </div>
+            
+            <div v-if="codError">
+              <h1 style="font-size:50px"> Hubo un error inesperado</h1> 
+                 <v-btn @click="redirect()">
+                      Ir al principal
+                 </v-btn>
+            </div>
+                
+        </div>     
         <div class="container-compra">
+        
            <div class="mensje">
-               Aprovecha los últimos días de descuento!!!!
+               <div class="mensaje-espera">
+                     Aprovecha los últimos días de descuento!!!!
+               </div>
+          
            </div>
-           <div>
+           <div style="display:flex">  
+                 <div>
                <div class="titulo">
                     {{ detalles.nombre }}
                 </div>
@@ -18,16 +43,28 @@
                         - Precio     :  S/ .{{ detalles.precio }}
                         </span> 
                 </div>
-                <div>
+                <div v-if="!estadoModalGrande">
                     <v-btn class="btn-comprar" @click="comprarCurso(detalles)">
                         COMPRAR
                     </v-btn>
                 </div>
+                <!-- <v-btn
+                    :loading="loading"
+                    :disabled="loading"
+                    class="bton-prueba"
+                    @click="loader = 'loading'"
+                    >
+                    Accept Terms
+                    </v-btn> -->
+                
                 
            </div>
            <div>
-               <img src="" alt="">
+               <img src="https://acceso.com.pe/wp-content/uploads/2022/03/logo.png"  class="img-ffff" alt="">
            </div>
+
+           </div>
+            
             
         </div>
     </div>
@@ -41,6 +78,11 @@ export default {
         headers
     },
     data: () => ({
+        loader: null,
+        loading: false,
+        correcto: false,
+        estadoModalGrande: false
+
     
     
     }),
@@ -48,14 +90,33 @@ export default {
    
     methods: {
         comprarCurso(detalles){
+            this.estadoModalGrande=true
+            //cambio de estado
+            this.$store.dispatch('carrito/estadoModal', detalles)
+            //compra
             this.$store.dispatch('carrito/compra', detalles)
-        }
+        },
+        redirect(){
+            window.location.href ='/prueba'
+        },
         
     },
     computed: {
-         ...mapGetters("nuevos", ["detalles"])
+         ...mapGetters("nuevos", ["detalles"]),
+         ...mapGetters("carrito", ["estadoModal", "codRes", "codError"])
 
     },
+    watch: {
+      loader () {
+        const l = this.loader
+        this[l] = !this[l]
+
+        setTimeout(() => (this[l] = false), 3000)
+
+        this.loader = null
+      },
+    },
+
     mounted () {
 
         const valores = window.location.search;
@@ -67,6 +128,60 @@ export default {
   }
 </script>
 <style >
+.image-espera{
+    width: 120px;
+    height: 200px;
+}   
+.mensaje-espera{
+    
+}
+.modalespera{
+    width: 500px;
+    height: 300px;
+    position: absolute;
+    margin-left: 460px ;
+    background: rgb(133, 175, 188);
+    
+}
+.img-ffff{
+    width: 70%;
+}
+.custom-loader {
+    animation: loader 1s infinite;
+    display: flex;
+  }
+  @-moz-keyframes loader {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @-webkit-keyframes loader {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @-o-keyframes loader {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes loader {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
 .container-div{
     /* background: #cbd5ee; */
     /* background: #ebf9ff; */
@@ -93,12 +208,14 @@ export default {
     font-size: 50px;
     margin-right: 640px;
     padding-top: 40px ;
+    margin-left:100px ;
 }
 .calificacion{
     color:rgb(255, 255, 255);
     font-size: 25px;
     padding-top: 15px ;
-    margin-right: 850px;
+    margin-right: 800px;
+    margin-left: 100px;
     
 }
 </style>
